@@ -685,8 +685,7 @@ function recalc() {
   document.getElementById('boxSetup').textContent = fmtBRL(implant);
 
   const mensalBase = getMensal(mun);
-  const encSugerido = getSuggestedEnc(mun);
-  const fatorEnc    = encSugerido > 0 ? Math.max(1, enc / encSugerido) : 1;
+  const fatorEnc = Math.max(1, enc / ENC_BASE);
 
   if (mensalBase) {
     const mensalFinal = Math.round(mensalBase * fatorEnc);
@@ -725,15 +724,7 @@ function calcFee() {
     'R$ ' + fee.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 }
 
-function setMun(v) {
-  mun = v;
-  // Atualiza enc sugerido ao mudar municípios
-  enc = getSuggestedEnc(mun);
-  const slEnc = document.getElementById('sl-enc');
-  slEnc.value = enc;
-  document.getElementById('val-enc').textContent = enc;
-  recalc();
-}
+function setMun(v) { mun = v; recalc(); }
 function setEnc(v) { enc = v; recalc(); }
 
 document.getElementById('land').addEventListener('input', calcFee);
