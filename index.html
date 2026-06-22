@@ -686,7 +686,7 @@ function recalc() {
 
   const mensalBase = getMensal(mun);
   const encSugerido = getSuggestedEnc(mun);
-  const fatorEnc    = encSugerido > 0 ? enc / encSugerido : 1;
+  const fatorEnc    = encSugerido > 0 ? Math.max(1, enc / encSugerido) : 1;
 
   if (mensalBase) {
     const mensalFinal = Math.round(mensalBase * fatorEnc);
